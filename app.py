@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-from ai4bharat.transliteration import XlitEngine
+from hindi_xlit import HindiTransliterator
 
 app = Flask(__name__)
-engine = XlitEngine("hi", beam_width=10, rescore=True)  # 'hi' for Hindi
+transliterator = HindiTransliterator()
 
 @app.route('/')
 def index():
@@ -13,10 +13,9 @@ def translit():
     data = request.json
     word = data.get('word', '')
     # Only support Hinglish (Roman) to Devanagari
-    result = engine.translit_word(word, topk=5)
-    suggestions = result['hi'] if 'hi' in result else []
+    suggestions = [transliterator.transliterate(word)]
     suggestions.append(word)
-    return jsonify({'suggestions': suggestions[:5]})
+    return jsonify({'suggestions': suggestions[0]})
 
 if __name__ == '__main__':
     app.run(debug=True) 
