@@ -73,4 +73,13 @@ instance/
 
 # System files
 Thumbs.db
-Desktop.ini 
+Desktop.ini
+
+# Node.js
+node_modules/
+
+# Python
+*.pyc
+
+# Logs
+*.log 
