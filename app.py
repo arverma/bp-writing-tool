@@ -13,7 +13,7 @@ def translit():
     data = request.json
     word = data.get('word', '')
     # Only support Hinglish (Roman) to Devanagari
-    suggestions = [transliterator.transliterate(word)]
+    suggestions = [transliterator.transliterate(word, 5)]
     suggestions.append(word)
     return jsonify({'suggestions': suggestions[0]})
 
