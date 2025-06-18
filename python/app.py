@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from hindi_xlit import HindiTransliterator
+import sys
+import os
 
 app = Flask(__name__)
 transliterator = HindiTransliterator()
@@ -18,4 +20,5 @@ def translit():
     return jsonify({'suggestions': suggestions[0]})
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    # For Electron, run on localhost with port 5001 to avoid AirPlay conflict
+    app.run(host='127.0.0.1', port=5001, debug=False) 
